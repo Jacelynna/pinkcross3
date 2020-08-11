@@ -1,0 +1,23 @@
+CREATE TABLE [dbo].[Donation Record]
+(
+    [Donation_Record_id] INT NOT NULL PRIMARY KEY, 
+    [Date_of_Donation] DATETIME NULL, 
+    [Mode_of_Donation] VARCHAR(20) NULL, 
+    [Amount_of_Donation] DECIMAL(6, 2) NULL, 
+    [Purpose_of_Donation] VARCHAR(100) NOT NULL, 
+    [Donor_Type] VARCHAR(10) NULL, 
+    [Company_Name] VARCHAR(45) NOT NULL, 
+    [Receipt_Number] INT NULL, 
+    [Date_of_Receipt] DATE NULL, 
+    [Tax_Exemption_Status] VARCHAR(13) NULL, 
+    [ID] INT NULL, 
+    CONSTRAINT [FK_DonorProfile _ToDonation Record] FOREIGN KEY ([ID]) REFERENCES [Donation Record]([ID])
+)
+
+CREATE TABLE [dbo].[User]
+(
+    [Username_id] VARCHAR(45) NOT NULL PRIMARY KEY, 
+    [Password] VARBINARY(20) NULL, 
+    [ID] INT NULL, 
+    CONSTRAINT [FK_User_ToDonorProfile] FOREIGN KEY ([ID]) REFERENCES [DonorProfile]([ID])
+)

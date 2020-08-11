@@ -1,0 +1,54 @@
+﻿@model System.Data.DataRowCollection
+
+<h2>Donation Record</h2>
+<p>
+    <a asp-controller="DonationRecord" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>DonationRecord_id</th>
+        <th>DateOfDonation</th>
+        <th>ModeofDonation</th>
+        <th>DonationAmount</th>
+        <th>PurposeOfDonation</th>
+        <th>DonorType</th>
+        <th>CompanyName</th>
+        <th>ReceiptNumber</th>
+        <th>DateOfReceipt</th>
+        <th>TaxExemptionStatus</th>
+        @if (User.IsInRole("Staff"))
+        {
+            <th>Action</th>
+        }
+    </tr>
+
+    @foreach (System.Data.DataRow row in Model)
+    {
+        <tr>
+            <td>@row["DonationRecord_id"]</td>
+            <td>@String.Format("{0:dd-MM-yyyy}", row["DateofDonation"])</td>
+            <td>@row["ModeofDonation"]</td>
+            <td>@row["DonationAmount"]</td>
+            <td>@row["PurposeOfDonation"]</td>
+            <td>@row["DonorType"]</td>
+            <td>@row["CompanyName"]</td>
+            <td>@row["ReceiptNumber"]</td>
+            <td>@String.Format("{0:dd-MM-yyyy}", row["DateOfReceipt"])</td>
+            <td>@row["TaxExemptionStatus"]</td>
+
+            <td>
+                <a asp-controller="DonationRecord"
+                   asp-action="Edit"
+                   asp-route-id="@row["DonationRecord_id"]">
+                    Edit
+                </a> |
+                <a asp-controller="DonationRecord"
+                   asp-action="Delete"
+                   asp-route-id="@row["DonationRecord_id"]"
+                   onclick="return confirm('Delete Donor Record <@row["DonationRecord_id"]>')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>

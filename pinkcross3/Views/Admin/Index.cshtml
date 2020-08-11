@@ -1,0 +1,46 @@
+﻿@model System.Data.DataRowCollection
+
+<h2>Admin</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-controller="Admin" asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Role</th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Action</th>
+        }
+    </tr>
+
+    @foreach (System.Data.DataRow item in Model)
+    {
+        <tr>
+            <td>@item["Username_id"]</td>
+            <td>@item["Password"]</td>
+            <td>@item["Role"]</td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    <a asp-controller="Admin"
+                       asp-action="Edit"
+                       asp-route-id="@item["Username_id"]">
+                        Edit
+                    </a> |
+                    <a asp-controller="Admin"
+                       asp-action="Delete"
+                       asp-route-id="@item["Username_id"]">
+                        Delete
+                    </a>
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+

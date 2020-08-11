@@ -1,0 +1,38 @@
+﻿@model User
+
+    <form asp-controller="User" asp-action="Login" method="post">
+        <h2 class="form-signin-heading">Login</h2>
+        <div class="col-5">
+            <div class="form-group row">
+                <label asp-for="Username_id" class="control-label">Username: </label>
+                <input asp-for="Username_id" class="form-control" placeholder="please enter your username" />
+                <span asp-validation-for="Username_id" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Password" class="control-label">Password: </label>
+                <input asp-for="Password" class="form-control" placeholder="please enter your password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="log in" />
+            </div>
+
+            @if (ViewData["Message"] != null)
+            {
+                <div class="form-group row">
+                    <div class="alert alert-@ViewData["MsgType"]">
+                        <text>@ViewData["Message"]</text>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <a class="btn btn-lg btn-link" asp-controller="User" asp-action="Register">Register</a>
+            </div>
+            <div class="col-3">&nbsp;</div>
+            <div class="col-1">
+                <a class="btn btn-lg btn-link" asp-controller="User" asp-action="ForgetPassword">Forget Password?</a>
+            </div>
+        </div>
+    </form>

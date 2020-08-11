@@ -1,0 +1,44 @@
+﻿@model System.Data.DataRowCollection
+
+<h2>Donor Profile</h2>
+<p>
+    <a asp-controller="DonorProfile" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Donor Name</th>
+        <th>Donor nric</th>
+        <th>Company Name</th>
+        <th>Donor Number</th>
+        <th>Donor Address</th>
+        @if (User.IsInRole("Staff"))
+        {
+            <th>Action</th>
+        }
+    </tr>
+
+    @foreach (System.Data.DataRow row in Model)
+    {
+<tr>
+    <td>@row["DonorName"]</td>
+    <td>@row["Donornric"]</td>
+    <td>@row["CompanyName"]</td>
+    <td>@row["DonorNumber"]</td>
+    <td>@row["DonorAddress"]</td>
+    <td>
+        <a asp-controller="DonorProfile"
+           asp-action="Edit"
+           asp-route-id="@row["Donornric"]">
+            Edit
+        </a> |
+        <a asp-controller="DonorProfile"
+           asp-action="Delete"
+           asp-route-id="@row["Donornric"]"
+           onclick="return confirm('Delete Donor Profile @row["DonorName"] ')">
+            Delete
+        </a>
+    </td>
+</tr>
+    }
+</table>
+
